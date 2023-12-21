@@ -101,9 +101,9 @@ void update_nearest_point (const Vec3 &x, BVHNode *node, NearPoint &p) {
 }
 
 double point_box_distance (const Vec3 &x, const BOX &box) {
-    Vec3 xp = Vec3(clamp(x[0], (double)box._dist[0], (double)box._dist[9]),
-                   clamp(x[1], (double)box._dist[1], (double)box._dist[10]),
-                   clamp(x[2], (double)box._dist[2], (double)box._dist[11]));
+    Vec3 xp = Vec3(std::clamp(x[0], (double)box._dist[0], (double)box._dist[9]),
+                   std::clamp(x[1], (double)box._dist[1], (double)box._dist[10]),
+                   std::clamp(x[2], (double)box._dist[2], (double)box._dist[11]));
     return norm(x - xp);
 }
 

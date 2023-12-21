@@ -185,7 +185,7 @@ void load_objs (vector<Mesh*> &meshes, const string &prefix) {
 static double angle (const Vec3 &x0, const Vec3 &x1, const Vec3 &x2) {
     Vec3 e1 = normalize(x1 - x0);
     Vec3 e2 = normalize(x2 - x0);
-    return acos(clamp(dot(e1, e2), -1., 1.));
+    return acos(std::clamp(dot(e1, e2), -1., 1.));
 }
 
 vector<Face*> triangulate (const vector<Vert*> &verts) {

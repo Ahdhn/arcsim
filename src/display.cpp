@@ -113,7 +113,8 @@ Vec3 strain_color (const Face *face) {
     Mat3x3 F = deformation_gradient<WS>(face);
     Vec3 l = eigen_values(F.t()*F);
     double s0 = sqrt(l[0]) - 1, s1 = sqrt(l[1]) - 1;
-    double tens = clamp(1e2*s0, 0., 0.5), comp = clamp(-1e2*s1, 0., 0.5);
+    double tens = std::clamp(1e2*s0, 0., 0.5);
+    double comp = std::clamp(-1e2*s1, 0., 0.5);
     return Vec3(1-tens, (1-tens)*(1-comp), (1-comp));
 }
 
@@ -139,7 +140,7 @@ inline double matrix_mag(const Mat3x3& M) {
 // http://www.sron.nl/~pault/colourschemes.pdf
 // [-1,1]
 Vec3 red_blue_colorscheme(double v) {
-    v=clamp(0.5*(v+1.0),0.0,1.0);
+    v=std::clamp(0.5*(v+1.0),0.0,1.0);
     double v2=sq(v),v3=v2*v,v4=v3*v,v5=v4*v;
     return Vec3 (0.237-2.13*v + 26.92*v2-65.5*v3+63.5*v4-22.36*v5, 
                  sq((0.572+1.524*v-1.811*v2)/(1-0.291*v+0.1574*v2)),

@@ -79,7 +79,7 @@ extern const double infinity;
 
 template <typename T> T sqr (const T& x) { return x*x; }
 
-template <typename T> T clamp (const T &x, const T &a, const T &b) {
+template <typename T> T clamp (const T x, const T a, const T b) {
     return std::min(std::max(x, a), b); }
 
 template <typename T> T min (const T &a, const T &b, const T &c) {

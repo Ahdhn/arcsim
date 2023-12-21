@@ -241,7 +241,7 @@ Mat3x3 stretch_plasticity_from_embedding(const Face *face) {
                              pos<PS>(face->v[2]->node), normal<PS>(face), face);
     SVD<3,3> svd = singular_value_decomposition(F_ps);
     for (int j=0;j<3; j++)
-        svd.s[j] = clamp(1.0/svd.s[j],1./limit,limit);
+        svd.s[j] = std::clamp(1.0/svd.s[j],1./limit,limit);
     Mat3x3 M = svd.Vt.t() * diag(svd.s) * svd.Vt;
     return M;
 }

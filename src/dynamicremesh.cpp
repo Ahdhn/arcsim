@@ -98,7 +98,7 @@ void dynamic_remesh (MeshSubset& subset, const map<Node*,Plane> &planes) {
 // Sizing
 
 double angle (const Vec3 &n1, const Vec3 &n2) {
-    return acos(clamp(dot(n1,n2),-1.,1.));
+    return acos(std::clamp(dot(n1,n2),-1.,1.));
 }
 
 template <int n> Mat<n,n> sqrt (const Mat<n,n> &A) {
@@ -153,7 +153,7 @@ Mat2x2 fracture_metric (Remeshing& remeshing, const Face* face) {
 
 	double refine = remeshing.refine_fracture * 0.5 * face->material->toughness;
 	double ramp0 = refine * 0.5, ramp1 = refine / 0.5;
-	double v = clamp( (fmax - ramp0) / (ramp1 - ramp0), 0.0, 1.0);
+	double v = std::clamp( (fmax - ramp0) / (ramp1 - ramp0), 0.0, 1.0);
 	return Mat2x2(v);
 }
 
@@ -213,7 +213,7 @@ Mat3x3 compute_face_sizing (Remeshing& remeshing, const Face *face, const map<No
     
     Eig<2> eig = eigen_decomposition(s);
     for (int i = 0; i < 2; i++) {
-    	eig.l[i] = clamp(eig.l[i],
+    	eig.l[i] = std::clamp(eig.l[i],
                          1.f/sq(remeshing.size_max),
                          1.f/sq(remeshing.size_min));
     }
